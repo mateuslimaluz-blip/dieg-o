@@ -46,6 +46,3 @@ if __name__ == "__main__":
         Minha_conta.sacar(6000.99)
 
         Minha_conta.extrato()
-
-        saldo_atual = Minha_conta.get_saldo()
-        print(f"\nValor retornado pelo get_saldo(): R$ {saldo_atual:.2f}\n")

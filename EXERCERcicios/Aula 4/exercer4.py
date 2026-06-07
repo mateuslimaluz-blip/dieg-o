@@ -40,11 +40,11 @@ print(f" o sensor diz {sensor1.status()} acredite nele")
 sensor2 = sensor(99)         
 print(f"eu acho que está {sensor2.temperatura} grus agora está muy caliente da não")
 print(f" o sensor diz {sensor2.status()} ainda pode crer nele")
-
+                            # por algum motivo o sensor 3 e 4 num da  erro de atributo??
 """sensor3 = sensor(167)         
 print(f"eu acho que está {sensor3.temperatura} grus agora está muy caliente da não")
 print(f" o sensor diz {sensor3.status()} tá suspeito mas 67676767!!!!!!!!!!!!!!")
-
+                            
 sensor4 = sensor(999)         
 print(f"eu acho que está {sensor4.temperatura} grus agora está muy caliente da não")
 print(f" o sensor diz {sensor4.status()} Tá amarrado") """

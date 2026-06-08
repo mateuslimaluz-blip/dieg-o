@@ -1,12 +1,35 @@
 class funcionario:
     def __init__(self, Nome, Matricula, Salario):
         self.Nome = Nome 
-        self.Matricula = Matricula
+        self.__Matricula = Matricula
         self.Salario = Salario
     
     def calcular_salario(self):
         return 0
+        
+    def exibir(self):
+        print(
+            f"Nome {self.Nome}  "
+            f"Matricula {self.Matricula:03d}  "
+            f"Tipo {self.__class__.__name__}  "
+            f"Salario R$ {self.calcular_salario():.2f}"
+        )
 
+    @property
+    def Matricula(self):
+        return self.__Matricula
+    
+    @property
+    def salario(self):
+        return self.__salario
+    
+    @salario.setter
+    def salario(self, valor):
+        if valor <= 0 :
+            raise ValueError ("não pode ser negativo ")
+        
+        self.__salario = self.valor
+ 
 class CLT(funcionario):
     def __init__(self, Nome, Matricula, Salario):
         super().__init__(Nome, Matricula, Salario)
@@ -30,12 +53,14 @@ class Gerente(funcionario):
     def calcular_salario(self):
         return self.Salario + self.bonus
 
-trabalhador = CLT("Jão", 1, 1550)
-trabalhador2 = Vendedor("Pão", 2, 2500, 0.10)
-trabalhador3 = Gerente("Claudio", 3, 3000, 750)
 
-print(f"Nome : {trabalhador.Nome} | Matricula : {trabalhador.Matricula: 04d} | Tipo : CLT | Salario : R$ {trabalhador.calcular_salario():.2f}")
-print(f"Nome : {trabalhador2.Nome} | Matricula : {trabalhador2.Matricula: 04d} | Tipo : Vendedor | Salario : R$ {trabalhador2.calcular_salario():.2f}")
-print(f"Nome : {trabalhador3.Nome} | Matricula : {trabalhador3.Matricula: 04d} | Tipo : Gerente | Salario : R$ {trabalhador3.calcular_salario():.2f}")
+            
+funcionarios = [
+ CLT("Jão", 1, 1550),
+ Vendedor("Pão", 2, 2500, 0.10),
+ Gerente("Claudio", 3, 3000, 750)
+]
+for funcionario in funcionarios:
+    funcionario.exibir()
 
 """Nome : Ana | Matricula : 001 | Tipo : CLT | Salario : R$ 3000.00"""

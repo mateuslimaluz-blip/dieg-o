@@ -64,3 +64,4 @@ for funcionario in funcionarios:
     funcionario.exibir()
 
 """Nome : Ana | Matricula : 001 | Tipo : CLT | Salario : R$ 3000.00"""
+"""ETA"""

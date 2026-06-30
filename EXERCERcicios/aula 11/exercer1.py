@@ -28,3 +28,4 @@ cursor.execute(
 )
 conexao.commit()
 conexao.close()
+''' tudo certo aqui '''

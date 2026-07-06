@@ -1,0 +1,21 @@
+POST http://127.0.0.1:5000/ alunos
+content-Type: application/json
+
+{"nome": "Ana",
+ "serie": "3°",
+ "nota": 1.99999}
+
+### 
+
+GET http://127.0.0.1:5000/alunos
+
+###
+PUT http://127.0.0.1:5000/alunos/89
+Content-Type: application/json
+
+{"nome": "anaís do incrivel mundo de gumbal",
+ "serie": "1°",
+  "nota": 9.9}
+###
+
+DELETE http://127.0.0.1:5000/alunos/99

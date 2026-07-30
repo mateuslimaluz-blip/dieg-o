@@ -1,6 +1,6 @@
-# Academia do Zé
+# Academia do Zé 
 
-API REST desenvolvida em Python com Flask e banco de dados SQLite.
+API REST desenvolvida em Python com Flask e banco de dados SQLite. [ensina node.js e express pra nois fessor]
 
 **Disciplina:** Programação no Desenvolvimento de Sistemas **Dupla:** Mateus Lima e Golang
 
@@ -8,13 +8,11 @@ API REST desenvolvida em Python com Flask e banco de dados SQLite.
 
 ## 📋 Sobre o projeto
 
-*Esta API gerencia uma academia. É possível cadastrar clientes e planos, sendo que cada cliente possui um Plano. A API permite listar, criar, atualizar, apagar e buscar registros.*
+*Esta API gerencia uma academia. É possível cadastrar clientes e criar planos,sendo que cada cliente possui um plano e possuindo suas informações. A API permite listar, criar, atualizar, apagar e buscar registros.*
 
 ---
 
 ## 🗂️ Tabelas do banco
-
-Descreva suas duas tabelas e como elas se relacionam.
 
 ### Tabela `[Planos]`
 
@@ -89,18 +87,18 @@ Liste todas as rotas que você criou. Exemplo:
 
 ## 🧪 Como testar
 
-Os testes estão no arquivo [`testes.http`](http://./testes.http) *(ou `testes.md` se usou curl)*.
+Os testes estão num arquivo "testes.http".
 
-Exemplo de requisição para criar um autor:
+Exemplo de requisição para criar um cliente:
 
-POST http://127.0.0.1:5000/autores
+POST http://127.0.0.1:5000/planos
 
 Content-Type: application/json
 
 {
 
-    "nome": "Machado de Assis"
-
+    "nome": "jose da solda",
+    "idade": 8
 }
 
 ---

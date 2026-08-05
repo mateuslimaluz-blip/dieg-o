@@ -1,110 +1,111 @@
-# Academia do Zé 
+# 🏋️ Academia do Zé — API REST - Gestão de Academia
 
-API REST desenvolvida em Python com Flask e banco de dados SQLite. [ensina node.js e express pra nois fessor]
-
-**Disciplina:** Programação no Desenvolvimento de Sistemas **Dupla:** Mateus Lima e Golang
-
----
-
-## 📋 Sobre o projeto
-
-*Esta API gerencia uma academia. É possível cadastrar clientes e criar planos,sendo que cada cliente possui um plano e possuindo suas informações. A API permite listar, criar, atualizar, apagar e buscar registros.*
+API REST desenvolvida em **Go (Golang)** utilizando o pacote nativo `net/http` e banco de dados **SQLite3**.  
+*(ensina Node.js e Express pra nós, fessor!)*
 
 ---
 
-## 🗂️ Tabelas do banco
+##  Sobre o Projeto
 
-### Tabela `[Planos]`
+Esta API gerencia o cadastro de uma academia. O sistema permite cadastrar planos de mensalidade e vincular alunos a esses planos. Cada aluno pertence a um plano específico (relação 1:N / Pai-Filho).
+
+A API oferece um CRUD completo para o gerenciamento de alunos e planos, além de filtros avançados e buscas com `JOIN`.
+
+---
+
+##  Tabelas do Banco de Dados
+
+### Tabela `planos` (Pai)
 
 | Campo | Tipo | Descrição |
-| :---- | :---- | :---- |
-| id | INTEGER | Chave primária (gerada automaticamente) |
-| nome | VARCHAR(50) | Nome do plano |
-| descrição | TEXT | Descrição do Planos |
-| preco | REAL | Preço do plano |
+| :--- | :--- | :--- |
+| `id` | `INTEGER` | Chave primária (Autoincrement) |
+| `nome` | `TEXT` | Nome do plano (ex: Plano Mensal Standard) |
+| `preco` | `REAL` | Preço da mensalidade |
 
-### Tabela `[clientes]`
+### Tabela `alunos` (Filho)
 
 | Campo | Tipo | Descrição |
-| :---- | :---- | :---- |
-| id | INTEGER | Chave primária (gerada automaticamente) |
-| idade | INTEGER | idade do cliente |
-| nome | VARCHAR(40) | nome do cliente |
-| \[planoi\]\_id | INTEGER | Chave estrangeira → aponta para \[tabela\_pai\] |
+| :--- | :--- | :--- |
+| `id` | `INTEGER` | Chave primária (Autoincrement) |
+| `nome` | `TEXT` | Nome completo do aluno |
+| `email` | `TEXT` | E-mail de contato |
+| `plano_id` | `INTEGER` | Chave estrangeira → Aponta para `planos(id)` (`ON DELETE CASCADE`) |
 
-**Relação:** cada \[filho\] pertence a um(a) \[pai\]. *(explique a relação do seu tema)*
-
----
-
-## 🚀 Como rodar o projeto
-
-\# 1\. Instalar o Flask (caso não tenha)
-
-pip install flask
-
-\# 2\. Rodar a API
-
-python main.py
-
-\# 3\. A API estará disponível em:
-
-\# http://127.0.0.1:5000
-
-O banco de dados (`[nome].db`) é criado automaticamente na primeira execução.
+**Relação:** Cada **Aluno** (Filho) está associado a um **Plano** (Pai). Um plano pode ter múltiplos alunos vinculados.
 
 ---
 
-## 🛣️ Rotas da API
+##  Como Rodar o Projeto
 
-Liste todas as rotas que você criou. Exemplo:
+### Pré-requisitos
+* **Go** (versão 1.22 ou superior)
+* **GCC / CGO** ativado (necessário para o driver do SQLite `go-sqlite3`)
 
-### Planos \[pai\]
+### Passos:
 
-| Método | Rota | O que faz |
-| :---- | :---- | :---- |
-| GET | `/Planos` | Lista todos os planos |
-| GET | `/planos/<id>` | Busca um planos pelo id |
-| POST | `/planos` | Cria um novo plano |
-| PUT | `/Planos/<id>` | Atualiza um plano |
-| DELETE | `/planos/<id>` | Apaga um autor |
+1. **Baixar as dependências do módulo Go:**
+   ```bash
+   go mod tidy
 
-### Clientes \[filho\]
+## Executar a aplicação
 
-| Método | Rota | O que faz |
-| :---- | :---- | :---- |
-| GET | `/clientes` | Lista todos os clientes |
-| POST | `/clientes` | Adiciona um novo cliente |
-| DELETE | `/clientes` | Deleta um cliente |
+    go run main.go
+    A API estará disponível em: http://localhost:8080
 
-### Rotas especiais
+### Como testar:
+    ### 1. Listar todos os planos
+GET http://localhost:8080/planos
 
-| Método | Rota | O que faz |
-| :---- | :---- | :---- |
-| GET | `/Plano-descricao` | Mostra totalmente a descrição do plano |
-| GET | `/clientes/planos/<id>` | Busca clientes com base no Id dos planos |
-
----
-
-## 🧪 Como testar
-
-Os testes estão num arquivo "testes.http".
-
-Exemplo de requisição para criar um cliente:
-
-POST http://127.0.0.1:5000/planos
-
+### 2. Criar um novo plano
+POST http://localhost:8080/planos
 Content-Type: application/json
 
 {
-
-    "nome": "jose da solda",
-    "idade": 8
+    "nome": "Plano Black Anual",
+    "preco": 199.90
 }
 
+### 3. Listar todos os alunos
+GET http://localhost:8080/alunos
+
+### 4. Criar um novo aluno
+POST http://localhost:8080/alunos
+Content-Type: application/json
+
+{
+    "nome": "Monkey D. Luffy",
+    "email": "luffy@pirates.com",
+    "plano_id": 1
+}
+
+### 5. Buscar aluno por ID
+GET http://localhost:8080/alunos/1
+
+### 6. Atualizar aluno por ID
+PUT http://localhost:8080/alunos/1
+Content-Type: application/json
+
+{
+    "nome": "Mateus Silva Atualizado",
+    "email": "mateus.novo@email.com",
+    "plano_id": 2
+}
+
+### 7. Listar alunos com o nome do Plano (JOIN)
+GET http://localhost:8080/alunos/detalhes
+
+### 8. Filtrar alunos por nome (LIKE)
+GET http://localhost:8080/alunos/busca?nome=Mateus
+
+### 9. Filtrar alunos por ID do Plano
+GET http://localhost:8080/plano/1/alunos
+
+### 10. Deletar um aluno por ID
+DELETE http://localhost:8080/alunos/4
+
 ---
+##  Integrantes
 
-## 👥 Integrantes
-
-- \[Mateus\] — criação do código   
-- \[Golang\] — Me deu forças mentais para aguentar a vida
-
+- **Mateus** — Criação do código  
+- **Golang** — Me deu forças mentais para aguentar a vida  

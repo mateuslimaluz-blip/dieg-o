@@ -20,7 +20,7 @@ A API oferece um CRUD completo para o gerenciamento de alunos e planos, além de
 | Campo | Tipo | Descrição |
 | :--- | :--- | :--- |
 | `id` | `INTEGER` | Chave primária (Autoincrement) |
-| `nome` | `TEXT` | Nome do plano (ex: Plano Mensal Standard) |
+| `nome` | `TEXT` | Nome do plano |
 | `preco` | `REAL` | Preço da mensalidade |
 
 ### Tabela `alunos` (Filho)
